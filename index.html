@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaswanth Lanka - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #0a0a0a;
+            color: #e8e8e8;
+            overflow-x: hidden;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100px) translateX(50px); }
+            50% { transform: translateY(-200px) translateX(-50px); }
+            75% { transform: translateY(-100px) translateX(100px); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        nav.scrolled {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 0.7rem 5%;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d4af37;
+            font-family: 'Georgia', serif;
+            letter-spacing: 2px;
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #e8e8e8;
+            text-decoration: none;
+            font-weight: 400;
+            transition: all 0.3s;
+            position: relative;
+            font-family: 'Georgia', serif;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #d4af37;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #d4af37;
+            font-family: 'Georgia', serif;
+            font-weight: 400;
+            letter-spacing: 3px;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            color: #c9c9c9;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            font-family: 'Georgia', serif;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #d4af37;
+            color: #0a0a0a;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+            background: #e5c158;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #d4af37;
+            border: 1px solid #d4af37;
+        }
+
+        .btn-secondary:hover {
+            background: #d4af37;
+            color: #0a0a0a;
+            transform: translateY(-5px);
+        }
+
+        section {
+            padding: 5rem 10%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            animation: slideIn 1s ease-out;
+            font-family: 'Georgia', serif;
+            font-weight: 400;
+            color: #d4af37;
+            letter-spacing: 2px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 2px;
+            background: #d4af37;
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            animation: fadeInRight 1s ease-out;
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .skill-card {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            background: rgba(30, 30, 30, 0.9);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.6);
+        }
+
+        .skill-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #d4af37;
+            font-family: 'Georgia', serif;
+        }
+
+        .skill-card ul {
+            list-style: none;
+        }
+
+        .skill-card li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .skill-card li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #d4af37;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s;
+            animation: scaleIn 0.5s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+            border-color: rgba(212, 175, 55, 0.6);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #d4af37;
+            font-family: 'Georgia', serif;
+        }
+
+        .project-card p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: rgba(212, 175, 55, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #d4af37;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .project-link {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .project-link:hover {
+            color: #e5c158;
+        }
+
+        .experience-timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            background: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            background: rgba(30, 30, 30, 0.9);
+            border-color: rgba(212, 175, 55, 0.6);
+        }
+
+        .timeline-item h3 {
+            font-size: 1.5rem;
+            color: #d4af37;
+            margin-bottom: 0.5rem;
+            font-family: 'Georgia', serif;
+        }
+
+        .timeline-item h4 {
+            font-size: 1.2rem;
+            color: #c9c9c9;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .timeline-item ul {
+            list-style: none;
+        }
+
+        .timeline-item li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-item li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #d4af37;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #e8e8e8;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .contact-link:hover {
+            color: #d4af37;
+            transform: translateY(-5px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: 3rem 5%;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <nav id="navbar">
+        <div class="logo">JL</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Jaswanth Lanka</h1>
+            <h2>Computer Science Graduate Student</h2>
+            <p>Passionate about Machine Learning, Data Science, and Building Innovative Solutions | Master's at Purdue University</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                    I'm a Computer Science graduate student at Purdue University Fort Wayne with a strong foundation in Machine Learning, Data Science, and Full-Stack Development. With a Bachelor's degree in Information Technology from Vellore Institute of Technology, I bring a diverse skill set and hands-on experience in building intelligent systems.
+                </p>
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                    My journey in tech has led me to work on exciting projects ranging from high-accuracy ML models to AR-based systems. I'm passionate about leveraging technology to solve real-world problems and create meaningful impact.
+                </p>
+                <h3 style="font-size: 1.5rem; color: #d4af37; margin-bottom: 1rem; font-family: 'Georgia', serif;">Education</h3>
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    📚 <strong>Master's in Computer Science</strong><br>
+                    Purdue University Fort Wayne (Aug 2023 - May 2025)<br>
+                    Skills: SQL, JavaScript, and more<br><br>
+                    🎓 <strong>Bachelor of Technology - Information Technology</strong><br>
+                    Vellore Institute of Technology (Jul 2019 - Jul 2023)
+                </p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>🎯 Programming</h3>
+                    <ul>
+                        <li>Python</li>
+                        <li>C</li>
+                        <li>JavaScript</li>
+                        <li>ReactJS</li>
+                        <li>SQL</li>
+                        <li>HTML/CSS</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>📊 Data Science</h3>
+                    <ul>
+                        <li>Scikit-Learn</li>
+                        <li>TensorFlow</li>
+                        <li>Keras</li>
+                        <li>Matplotlib</li>
+                        <li>Seaborn</li>
+                        <li>Pandas</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <h3>🛠️ Tools & Tech</h3>
+                    <ul>
+                        <li>Docker</li>
+                        <li>Proxmox</li>
+                        <li>Power Automate</li>
+                        <li>Tableau</li>
+                        <li>Flask</li>
+                        <li>Selenium</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>Chronic Kidney Disease Prediction</h3>
+                    <p>Built a high-accuracy ensemble ML model achieving 99.33% accuracy for predicting chronic kidney disease using advanced machine learning techniques.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Scikit-learn</span>
+                        <span class="tag">Pandas</span>
+                        <span class="tag">Machine Learning</span>
+                    </div>
+                    <a href="https://github.com/lankajaswanth/Chronic-kidney-disease-prediction" class="project-link" target="_blank">View Project →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>Job Market Analysis 2.0</h3>
+                    <p>Scraped job data from Naukri using Power Automate and created interactive Tableau dashboards for comprehensive market insights.</p>
+                    <div class="project-tags">
+                        <span class="tag">Power Automate</span>
+                        <span class="tag">Tableau</span>
+                        <span class="tag">Excel</span>
+                        <span class="tag">Data Analytics</span>
+                    </div>
+                    <a href="https://github.com/lankajaswanth/Job-Market-Analysis-2.0" class="project-link" target="_blank">View Project →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>HVAC AR Troubleshooting System</h3>
+                    <p>Built an AR-based troubleshooting system for HVAC components using Unity, AR Core, and Vuforia. Led a team of three developers.</p>
+                    <div class="project-tags">
+                        <span class="tag">Unity</span>
+                        <span class="tag">AR Core</span>
+                        <span class="tag">Vuforia</span>
+                        <span class="tag">AR Foundation</span>
+                    </div>
+                    <a href="https://github.com/lankajaswanth/HVAC-THERMAL-SYSTEM" class="project-link" target="_blank">View Project →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>Keyless Authentication System</h3>
+                    <p>Developed a passwordless face authentication system with AES encryption and real-time face recognition for enhanced security.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">OpenCV</span>
+                        <span class="tag">AES Encryption</span>
+                        <span class="tag">Security</span>
+                    </div>
+                    <a href="https://github.com/lankajaswanth/Keyless_Authentication" class="project-link" target="_blank">View Project →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>CS Job Portal</h3>
+                    <p>Designed a multi-user job portal with student and professor roles using Bubble.io for no-code development.</p>
+                    <div class="project-tags">
+                        <span class="tag">Bubble.io</span>
+                        <span class="tag">No-Code</span>
+                        <span class="tag">Web Development</span>
+                    </div>
+                    <a href="https://github.com/lankajaswanth/CS-JOB-PORTAL-" class="project-link" target="_blank">View Project →</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>DS2OS Traffic Traces</h3>
+                    <p>Analyzed smart home system traffic datasets for research purposes, focusing on network patterns and security implications.</p>
+                    <div class="project-tags">
+                        <span class="tag">Data Analysis</span>
+                        <span class="tag">Network Security</span>
+                        <span class="tag">Python</span>
+                    </div>
+                    <a href="https://github.com/lankajaswanth/DS2OS-TRAFFIC-TRACES" class="project-link" target="_blank">View Project →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2 class="section-title">Experience & Leadership</h2>
+        <div class="experience-timeline">
+            <div class="timeline-item">
+                <h3>Jr.AI/ML Developer</h3>
+                <h4>Stack Systems, inc • Full-time</h4>
+                <p style="color: #c9c9c9; margin-bottom: 1rem;">Jul 2025 - Present • 5 months</p>
+                <p style="color: #c9c9c9; margin-bottom: 1rem;">United States • Remote</p>
+                <ul>
+                    <li>Developing AI and machine learning solutions for enterprise clients</li>
+                    <li>Working with cutting-edge ML frameworks and technologies</li>
+                    <li>Collaborating with cross-functional teams on AI initiatives</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h3>CS Lab Manager</h3>
+                <h4>Purdue University Fort Wayne</h4>
+                <p style="color: #c9c9c9; margin-bottom: 1rem;">Aug 2024 - May 2025 • 10 months</p>
+                <ul>
+                    <li>Managed computer science laboratory operations and resources</li>
+                    <li>Assisted students with technical issues and software setup</li>
+                    <li>Maintained lab equipment and ensured smooth daily operations</li>
+                    <li>Coordinated with faculty for lab scheduling and requirements</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Student Success Center Tutor</h3>
+                <h4>Purdue University Fort Wayne</h4>
+                <p style="color: #c9c9c9; margin-bottom: 1rem;">Dec 2023 - May 2025 • 1 year 6 months</p>
+                <ul>
+                    <li>Provided IT subject tutoring for undergraduate students</li>
+                    <li>Helped students understand complex programming concepts</li>
+                    <li>Developed custom learning materials and exercises</li>
+                    <li>Mentored students on career development and technical skills</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Project Manager & Team Lead</h3>
+                <h4>Multiple Independent Projects</h4>
+                <ul>
+                    <li>Managed multiple independent projects and research initiatives</li>
+                    <li>Created a CS department job portal using Bubble No-code tool</li>
+                    <li>Built a Proxmox server for project testing with virtual machines</li>
+                    <li>Led a team of three on AR-based HVAC troubleshooting system</li>
+                    <li>Used Unity, AR Core, Vuforia, and AR Foundation</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            <p>I'm always open to new opportunities, collaborations, and interesting conversations. Whether you have a project in mind or just want to connect, feel free to reach out!</p>
+            <div class="contact-links">
+                <a href="mailto:lankajaswanth44@gmail.com" class="contact-link">
+                    📧 Email Me
+                </a>
+                <a href="https://github.com/lankajaswanth" class="contact-link" target="_blank">
+                    💻 GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/jaswanth-lanka" class="contact-link" target="_blank">
+                    💼 LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 Jaswanth Lanka. Built with passion and code. 🚀</p>
+    </footer>
+
+    <script>
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = Math.random() * 5 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = Math.random() * 10 + 10 + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, .timeline-item, .skill-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
